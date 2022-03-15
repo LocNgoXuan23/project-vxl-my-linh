@@ -23,7 +23,7 @@ function App() {
   const showAlert = () => {
     let status = true
     if (temperature) {
-      if (temperature > 10 || gas > 10) {
+      if (temperature > 60 || gas > 50) {
         status = false
       }
       if (!status) {
