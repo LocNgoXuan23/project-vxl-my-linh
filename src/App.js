@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import List from './List'
 import axios from 'axios'
 function App() {
   const [co2, setCo2] = useState(null)
@@ -19,9 +18,24 @@ function App() {
     }
   }
 
+  const showAlert = () => {
+    let message = `${temperature > 100 ? 'Canh bao nhiet do cao. ' : ''}${co2 > 50 ? 'Canh bao o nhiem. ' : ''}${humidity > 10 ? 'Co mua. ' : ''}`
+    if (message) {
+      alert(message)
+    }
+  }
+
   useEffect(()=> {
     fetchData()
+    const intervalFetchData = setInterval(() => {
+      fetchData()
+    }, 60000)
+    return () => clearInterval(intervalFetchData)
   }, [])
+
+  useEffect(() => {
+    setTimeout(showAlert, 1000)
+  }, [temperature, co2, humidity])
 
 
   if (!co2 || !temperature || !humidity) {
@@ -39,17 +53,10 @@ function App() {
     <main>
       <section className='container'>
         <h3>Co2 : {co2}</h3>
+        ----------------------
         <h3>Temperature : {temperature}</h3>
+        ----------------------
         <h3>Humidity : {humidity}</h3>
-        {
-          temperature > 50 && <h2>Canh bao nhiet do cao</h2>
-        }
-        {
-          co2 > 50 && <h2>Canh bao o nhiem</h2>
-        }
-        {
-          humidity > 50 && <h2>Co mua</h2>
-        }
       </section>
     </main>
   )
