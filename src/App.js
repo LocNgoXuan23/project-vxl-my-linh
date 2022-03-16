@@ -22,7 +22,7 @@ function App() {
   // hien thong bao
   const showAlert = () => {
     let status = true
-    if (temperature) {
+    if (gas) {
       if (temperature > 60 || gas > 30) {
         status = false
       }
@@ -37,7 +37,7 @@ function App() {
     fetchData()
     const intervalFetchData = setInterval(() => {
       fetchData()
-    }, 30000)
+    }, 15000)
     return () => clearInterval(intervalFetchData)
   }, [])
 
