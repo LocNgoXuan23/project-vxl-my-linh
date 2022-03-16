@@ -37,7 +37,7 @@ function App() {
     fetchData()
     const intervalFetchData = setInterval(() => {
       fetchData()
-    }, 60000)
+    }, 30000)
     return () => clearInterval(intervalFetchData)
   }, [])
 
